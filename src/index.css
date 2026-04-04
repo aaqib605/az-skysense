@@ -1,1 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
+
+:root {
+  font-family: "Poppins", sans-serif;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.weather-theme-default {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.18),
+      transparent 35%
+    ),
+    linear-gradient(135deg, #0f172a 0%, #1d4ed8 45%, #38bdf8 100%);
+}
+
+.weather-theme-clear {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.22),
+      transparent 35%
+    ),
+    linear-gradient(135deg, #2563eb 0%, #38bdf8 45%, #facc15 100%);
+}
+
+.weather-theme-clouds {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.16),
+      transparent 35%
+    ),
+    linear-gradient(135deg, #475569 0%, #64748b 45%, #cbd5e1 100%);
+}
+
+.weather-theme-rain {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.12),
+      transparent 35%
+    ),
+    linear-gradient(135deg, #0f172a 0%, #1e3a8a 45%, #0ea5e9 100%);
+}
+
+.weather-theme-snow {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.22),
+      transparent 35%
+    ),
+    linear-gradient(135deg, #94a3b8 0%, #cbd5e1 45%, #f8fafc 100%);
+}
+
+.weather-theme-thunderstorm {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(250, 204, 21, 0.12),
+      transparent 35%
+    ),
+    linear-gradient(135deg, #111827 0%, #312e81 50%, #1f2937 100%);
+}
