@@ -4,10 +4,9 @@ import SearchSection from "./components/SearchSection";
 import WeatherContent from "./components/WeatherContent";
 
 import useWeather from "./hooks/useWeather";
-
+import { useState,useEffect } from "react";
 import getWeatherTheme from "./utils/weatherThemes";
 
-const mockHistory = ["Pune", "Mumbai", "Delhi", "Bengaluru", "Hyderabad"];
 
 function App() {
   const {
@@ -20,18 +19,42 @@ function App() {
     searchByCity,
     searchByCoords,
   } = useWeather();
+  const [history, setHistory] = useState(()=>{
+    const stored = localStorage.getItem("searchHistory");
+    return stored ? JSON.parse(stored) : [];
+  });
 
+  useEffect(() => {
+    localStorage.setItem("searchHistory", JSON.stringify(history));
+  }, [history]);
+  
+  function clearHistory() {
+    setHistory([]);
+    
+  }
+  
   const themeClassName = getWeatherTheme(weather);
-
+  
   async function handleSearch(cityToSearch) {
     const trimmedCity = cityToSearch.trim();
-
+    
     if (!trimmedCity) return;
-
+    
     await searchByCity(trimmedCity);
     setQuery("");
+    
+    
+    setHistory((prev) => {
+      const updated = [trimmedCity, ...prev.filter((city) => city !== trimmedCity)].slice(0, 10);
+      return updated;
+    });
   }
-
+  function handleHistorySelect(city) {
+  handleSearch(city);
+}
+  function handleHistoryDelete(city) {
+  setHistory((prev) => prev.filter((item) => item !== city));
+}
   async function handleCurrentLocation() {
     navigator.geolocation.getCurrentPosition(
       async (position) => {
@@ -59,7 +82,7 @@ function App() {
           isLoading={isLoading}
         />
 
-        <SearchHistory history={mockHistory} />
+        <SearchHistory history={history} onClear={clearHistory} onSelect={handleHistorySelect} onDelete={handleHistoryDelete}/>
 
         <WeatherContent
           isLoading={isLoading}
