@@ -1,8 +1,8 @@
 function LoadingState() {
   return (
-    <div className="rounded-3xl border border-white/20 bg-white/10 p-8 text-center text-white backdrop-blur-md">
-      <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-4 border-white/30 border-t-white" />
-      <p className="text-sm font-medium text-white/90">
+    <div className="app-glass-panel rounded-3xl p-8 text-center backdrop-blur-md">
+      <div className="app-loader mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-4" />
+      <p className="app-text-main text-sm font-medium">
         Fetching weather data...
       </p>
     </div>

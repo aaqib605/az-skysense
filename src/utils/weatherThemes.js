@@ -5,6 +5,24 @@ function getWeatherTheme(weather) {
 
   const condition = weather.condition.toLowerCase();
 
+  if (weather.isNight) {
+    if (condition === "clear") {
+      return "weather-theme-night-clear";
+    }
+
+    if (condition === "clouds") {
+      return "weather-theme-night-clouds";
+    }
+
+    if (condition === "rain" || condition === "drizzle") {
+      return "weather-theme-night-rain";
+    }
+
+    if (condition === "thunderstorm") {
+      return "weather-theme-thunderstorm";
+    }
+  }
+
   if (condition === "clear") {
     return "weather-theme-clear";
   }

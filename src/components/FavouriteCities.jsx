@@ -1,30 +1,23 @@
-import { Trash2, X } from "lucide-react";
+import { Heart, X } from "lucide-react";
 
-function SearchHistory({
-  history,
-  onSelectCity,
-  onDeleteCity,
-  onClearHistory,
-}) {
-  if (!history.length) return null;
+function FavouriteCities({ cities, onSelectCity, onDeleteCity }) {
+  if (!cities.length) {
+    return null;
+  }
 
   return (
     <section className="mb-6">
       <div className="mb-3 flex items-center justify-between gap-3">
-        <h2 className="app-text-main text-sm font-semibold">Recent Searches</h2>
-
-        <button
-          type="button"
-          onClick={onClearHistory}
-          className="app-glass-panel app-text-main inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium backdrop-blur-md transition"
-        >
-          <Trash2 size={14} />
-          Clear history
-        </button>
+        <div className="flex items-center gap-2">
+          <Heart size={16} className="app-text-main fill-current" />
+          <h2 className="app-text-main text-sm font-semibold">
+            Favourite Cities
+          </h2>
+        </div>
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {history.map((city) => (
+        {cities.map((city) => (
           <div
             key={city}
             className="app-glass-panel group flex items-center gap-2 rounded-full px-4 py-2 text-sm backdrop-blur-md"
@@ -40,7 +33,7 @@ function SearchHistory({
             <button
               type="button"
               onClick={() => onDeleteCity(city)}
-              aria-label={`Delete ${city} from search history`}
+              aria-label={`Remove ${city} from favourites`}
               className="app-text-muted rounded-full transition hover:opacity-100 md:opacity-0 md:group-hover:opacity-100"
             >
               <X size={14} />
@@ -52,4 +45,4 @@ function SearchHistory({
   );
 }
 
-export default SearchHistory;
+export default FavouriteCities;
