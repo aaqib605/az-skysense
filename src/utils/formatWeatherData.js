@@ -6,6 +6,7 @@ function formatCurrentWeather(weatherData) {
       month: "long",
       day: "numeric",
     }),
+    condition: weatherData.weather[0].main,
     description: weatherData.weather[0].description,
     temp: `${Math.round(weatherData.main.temp)}°C`,
     feelsLike: `${Math.round(weatherData.main.feels_like)}°C`,

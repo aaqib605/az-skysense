@@ -5,17 +5,62 @@ import WeatherContent from "./components/WeatherContent";
 
 import useWeather from "./hooks/useWeather";
 
+import getWeatherTheme from "./utils/weatherThemes";
+
 const mockHistory = ["Pune", "Mumbai", "Delhi", "Bengaluru", "Hyderabad"];
 
 function App() {
-  const { weather, forecast, isLoading, error } = useWeather();
+  const {
+    query,
+    setQuery,
+    weather,
+    forecast,
+    isLoading,
+    error,
+    searchByCity,
+    searchByCoords,
+  } = useWeather();
+
+  const themeClassName = getWeatherTheme(weather);
+
+  async function handleSearch(cityToSearch) {
+    const trimmedCity = cityToSearch.trim();
+
+    if (!trimmedCity) return;
+
+    await searchByCity(trimmedCity);
+    setQuery("");
+  }
+
+  async function handleCurrentLocation() {
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        await searchByCoords(latitude, longitude);
+      },
+      (geoError) => {
+        console.error(geoError.message);
+      },
+    );
+  }
 
   return (
-    <div className="weather-theme-clear min-h-screen px-4 py-6 md:px-6 md:py-10">
+    <div
+      className={`${themeClassName} min-h-screen px-4 py-6 md:px-6 md:py-10`}
+    >
       <main className="mx-auto w-full max-w-5xl">
         <Header />
-        <SearchSection />
+
+        <SearchSection
+          query={query}
+          setQuery={setQuery}
+          onSearch={handleSearch}
+          onUseCurrentLocation={handleCurrentLocation}
+          isLoading={isLoading}
+        />
+
         <SearchHistory history={mockHistory} />
+
         <WeatherContent
           isLoading={isLoading}
           error={error}

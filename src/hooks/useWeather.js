@@ -5,12 +5,14 @@ import {
   fetchWeatherByCity,
   fetchWeatherByCoords,
 } from "../services/weatherService";
+
 import {
   formatCurrentWeather,
   formatForecastData,
 } from "../utils/formatWeatherData";
 
 function useWeather() {
+  const [query, setQuery] = useState("");
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -62,6 +64,8 @@ function useWeather() {
   }, []);
 
   return {
+    query,
+    setQuery,
     weather,
     forecast,
     isLoading,
