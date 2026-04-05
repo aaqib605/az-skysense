@@ -1,16 +1,47 @@
-# React + Vite
+# SkySense
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + Vite weather app powered by the OpenWeather API.
 
-Currently, two official plugins are available:
+## API setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Create an OpenWeather API key from https://openweathermap.org/api
+2. Copy `.env.example` to `.env`
+3. Add your key:
 
-## React Compiler
+```env
+VITE_OPENWEATHER_API_KEY=your_openweather_api_key_here
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+`.env` is already listed in `.gitignore`, so your real API key file stays private and should not be pushed.
 
-## Expanding the ESLint configuration
+## Run locally
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+## Features by Ayush Patel
+
+- Current weather by city search
+- Current location weather lookup
+- Debounced city autocomplete with OpenWeather geocoding
+- 5-day forecast strip with high/low temperatures
+- Next 24 hours temperature chart
+- Air Quality Index card with color-coded status
+- `°C / °F` temperature unit switcher
+- Dark / light mode toggle with saved preference
+- Dynamic weather background themes, including night variants
+- Last updated timestamp
+- Favourite cities list with local persistence
+- Recent search history with clear/remove actions
+
+## Current API integration
+
+- City weather search uses `fetchWeatherByCity()` in `src/services/weatherService.js`
+- Current-location weather uses `fetchWeatherByCoords()`
+- Forecast, hourly trend, and 5-day strip use `fetchForecastByCoords()`
+- AQI uses `fetchAirQualityByCoords()`
+- Autocomplete uses `fetchCitySuggestions()`
+
+If the API key is missing, the app shows a clear setup error message instead of failing silently.
