@@ -32,16 +32,16 @@ body {
   overflow: hidden;
   background:
     radial-gradient(
-      circle at 18% 16%,
-      rgba(255, 255, 255, 0.28),
-      transparent 35%
+      circle at 82% 12%,
+      rgba(255, 255, 255, 0.48),
+      transparent 24%
     ),
     radial-gradient(
-      circle at 76% 22%,
-      rgba(254, 240, 138, 0.46),
-      transparent 22%
+      circle at 84% 16%,
+      rgba(254, 240, 138, 0.68),
+      transparent 20%
     ),
-    linear-gradient(135deg, #1d4ed8 0%, #38bdf8 48%, #fbbf24 100%);
+    linear-gradient(135deg, #0ea5e9 0%, #38bdf8 48%, #fde68a 100%);
   background-size: 180% 180%, 140% 140%, 220% 220%;
   animation: clear-sky-breathe 5s ease-in-out infinite alternate;
 }
@@ -58,53 +58,61 @@ body {
 .weather-theme-clear::before {
   background:
     radial-gradient(
-      circle at 74% 20%,
-      rgba(255, 249, 196, 0.95) 0 4%,
-      rgba(250, 204, 21, 0.38) 10%,
-      rgba(255, 255, 255, 0.08) 18%,
-      transparent 28%
+      circle at 84% 12%,
+      rgba(255, 255, 255, 1) 0 4.2rem,
+      rgba(254, 249, 195, 0.98) 4.25rem 6.4rem,
+      rgba(251, 191, 36, 0.52) 6.45rem 9.6rem,
+      rgba(255, 255, 255, 0.18) 9.7rem 14.5rem,
+      transparent 18rem
     ),
     conic-gradient(
-      from 8deg at 74% 20%,
+      from 12deg at 84% 12%,
       transparent 0deg,
-      rgba(255, 255, 255, 0.18) 18deg,
-      transparent 36deg,
-      transparent 68deg,
-      rgba(255, 255, 255, 0.12) 84deg,
-      transparent 108deg,
+      rgba(255, 255, 255, 0.2) 12deg,
+      transparent 26deg,
+      transparent 42deg,
+      rgba(254, 240, 138, 0.28) 56deg,
+      transparent 72deg,
+      transparent 92deg,
+      rgba(255, 255, 255, 0.16) 110deg,
+      transparent 128deg,
       transparent 360deg
     );
-  filter: blur(0.75px);
-  opacity: 0.82;
-  transform-origin: 74% 20%;
+  filter: blur(0.35px);
+  opacity: 0.96;
+  transform-origin: 84% 12%;
   animation: clear-sun-shimmer 4.5s ease-in-out infinite alternate;
 }
 
 .weather-theme-clear::after {
   background:
-    radial-gradient(
-      ellipse at 12% 34%,
-      rgba(255, 255, 255, 0.28) 0 7%,
-      transparent 24%
-    ),
-    radial-gradient(
-      ellipse at 36% 66%,
-      rgba(255, 255, 255, 0.2) 0 6%,
-      transparent 21%
-    ),
-    radial-gradient(
-      ellipse at 88% 42%,
-      rgba(255, 255, 255, 0.18) 0 5%,
-      transparent 19%
+    linear-gradient(
+      135deg,
+      transparent 0 8%,
+      rgba(255, 255, 255, 0.34) 12%,
+      rgba(254, 240, 138, 0.18) 18%,
+      transparent 28%,
+      transparent 36%,
+      rgba(255, 255, 255, 0.24) 43%,
+      rgba(254, 240, 138, 0.14) 50%,
+      transparent 60%,
+      transparent 70%,
+      rgba(255, 255, 255, 0.18) 76%,
+      transparent 86% 100%
     ),
     linear-gradient(
-      115deg,
-      transparent 0 24%,
-      rgba(255, 255, 255, 0.09) 32%,
-      transparent 42% 100%
+      135deg,
+      transparent 0 20%,
+      rgba(255, 255, 255, 0.16) 28%,
+      transparent 38% 100%
     );
-  background-size: 150% 150%, 135% 135%, 120% 120%, 220% 220%;
-  animation: clear-cloud-parallax 9s ease-in-out infinite alternate;
+  background-position: 80% -18%, 100% -10%;
+  background-size: 125% 150%, 95% 125%;
+  filter: blur(5px);
+  mix-blend-mode: screen;
+  opacity: 0.82;
+  transform: translate3d(8%, -8%, 0);
+  animation: clear-falling-rays 5.8s ease-in-out infinite;
 }
 
 .weather-theme-clear > * {
@@ -124,31 +132,32 @@ body {
 
 @keyframes clear-sun-shimmer {
   0% {
-    transform: translate3d(-1%, -0.5%, 0) scale(1);
-    opacity: 0.74;
+    transform: translate3d(-0.3%, -0.3%, 0) scale(1);
+    opacity: 0.88;
   }
 
   100% {
-    transform: translate3d(1.5%, 1%, 0) scale(1.08);
-    opacity: 0.92;
+    transform: translate3d(0.8%, 0.6%, 0) scale(1.06);
+    opacity: 1;
   }
 }
 
-@keyframes clear-cloud-parallax {
+@keyframes clear-falling-rays {
   0% {
-    background-position: 0% 30%, 48% 72%, 96% 40%, 0% 50%;
-    transform: translate3d(-7%, -1%, 0) scale(1);
-    opacity: 0.62;
+    background-position: 88% -24%, 104% -16%;
+    transform: translate3d(10%, -10%, 0) scale(1);
+    opacity: 0.58;
   }
 
-  45% {
-    opacity: 0.82;
+  50% {
+    background-position: 44% 46%, 64% 36%;
+    opacity: 0.9;
   }
 
   100% {
-    background-position: 18% 32%, 62% 66%, 78% 45%, 100% 50%;
-    transform: translate3d(7%, 2%, 0) scale(1.03);
-    opacity: 0.9;
+    background-position: 10% 112%, 28% 96%;
+    transform: translate3d(-8%, 9%, 0) scale(1.04);
+    opacity: 0.62;
   }
 }
 
