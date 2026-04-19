@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import SearchHistory from "./components/SearchHistory";
 import SearchSection from "./components/SearchSection";
+import WeatherBackground from "./components/WeatherBackground";
 import WeatherContent from "./components/WeatherContent";
 // Local hooks
 import useWeather from "./hooks/useWeather";
@@ -71,9 +72,11 @@ function App() {
   
   return (
     <div
-      className={`${themeClassName} min-h-screen px-4 py-6 md:px-6 md:py-10`}
+      className={`${themeClassName} relative min-h-screen overflow-hidden px-4 py-6 md:px-6 md:py-10`}
     >
-      <main className="mx-auto w-full max-w-5xl">
+      <WeatherBackground themeClassName={themeClassName} />
+
+      <main className="relative z-10 mx-auto w-full max-w-5xl">
         <Header />
 
         <SearchSection
