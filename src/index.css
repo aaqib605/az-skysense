@@ -163,7 +163,15 @@ body {
   .cloud,
   .rain-drop,
   .rain-mist,
-  .rain-splashes {
+  .rain-splashes,
+  .snow-haze,
+  .snowflake,
+  .storm-cloud,
+  .storm-rain,
+  .storm-rain-streak,
+  .storm-splashes,
+  .storm-flash,
+  .lightning-bolt {
     animation: none;
   }
 }
@@ -419,21 +427,390 @@ body {
 }
 
 .weather-theme-snow {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background:
     radial-gradient(
-      circle at top left,
-      rgba(255, 255, 255, 0.22),
+      circle at 18% 16%,
+      rgba(255, 255, 255, 0.32),
       transparent 35%
     ),
-    linear-gradient(135deg, #94a3b8 0%, #cbd5e1 45%, #f8fafc 100%);
+    linear-gradient(135deg, #64748b 0%, #cbd5e1 48%, #f8fafc 100%);
+}
+
+.snow-animation-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.snow-haze {
+  position: absolute;
+  inset: -10%;
+  display: block;
+  background:
+    radial-gradient(
+      ellipse at 24% 34%,
+      rgba(255, 255, 255, 0.24),
+      transparent 34%
+    ),
+    radial-gradient(
+      ellipse at 72% 72%,
+      rgba(226, 232, 240, 0.28),
+      transparent 38%
+    );
+  filter: blur(22px);
+  opacity: 0.76;
+  animation: snow-haze-drift 12s ease-in-out infinite alternate;
+}
+
+.snowflake {
+  position: absolute;
+  top: -8vh;
+  left: var(--left);
+  display: block;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.48);
+  opacity: var(--opacity);
+  animation: snowflake-fall var(--duration) linear var(--delay) infinite;
+}
+
+@keyframes snowflake-fall {
+  0% {
+    transform: translate3d(0, -10vh, 0);
+  }
+
+  50% {
+    transform: translate3d(calc(var(--drift) * 0.45), 56vh, 0);
+  }
+
+  100% {
+    transform: translate3d(var(--drift), 112vh, 0);
+  }
+}
+
+@keyframes snow-haze-drift {
+  0% {
+    transform: translate3d(-1%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(1.5%, -1%, 0);
+  }
 }
 
 .weather-theme-thunderstorm {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background:
     radial-gradient(
-      circle at top left,
-      rgba(250, 204, 21, 0.12),
-      transparent 35%
+      ellipse at 50% 0%,
+      rgba(125, 211, 252, 0.18),
+      transparent 34%
     ),
-    linear-gradient(135deg, #111827 0%, #312e81 50%, #1f2937 100%);
+    radial-gradient(
+      circle at 74% 18%,
+      rgba(250, 204, 21, 0.11),
+      transparent 20%
+    ),
+    linear-gradient(180deg, #050816 0%, #0b1220 36%, #182333 68%, #0a0f18 100%);
+}
+
+.thunder-animation-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.storm-vignette {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 6, 23, 0.08),
+      transparent 34%,
+      rgba(2, 6, 23, 0.42)
+    ),
+    radial-gradient(
+      ellipse at center,
+      transparent 38%,
+      rgba(2, 6, 23, 0.52) 100%
+    );
+}
+
+.storm-cloud {
+  position: absolute;
+  top: -16%;
+  left: -26%;
+  display: block;
+  width: 112rem;
+  height: 38rem;
+  background:
+    radial-gradient(
+      ellipse at 12% 56%,
+      rgba(2, 6, 23, 0.95) 0 16%,
+      transparent 29%
+    ),
+    radial-gradient(
+      ellipse at 31% 34%,
+      rgba(8, 13, 26, 0.96) 0 23%,
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 55% 42%,
+      rgba(20, 29, 43, 0.9) 0 24%,
+      transparent 39%
+    ),
+    radial-gradient(
+      ellipse at 78% 54%,
+      rgba(3, 7, 18, 0.9) 0 21%,
+      transparent 36%
+    ),
+    radial-gradient(
+      ellipse at 48% 76%,
+      rgba(71, 85, 105, 0.26) 0 28%,
+      transparent 52%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(148, 163, 184, 0.14),
+      rgba(15, 23, 42, 0.42) 44%,
+      rgba(2, 6, 23, 0.12) 100%
+    );
+  filter: blur(11px);
+  opacity: 0.94;
+  transform: translate3d(-3%, -1%, 0) scale(1);
+  animation: storm-cloud-drift 18s ease-in-out infinite alternate;
+}
+
+.storm-cloud-two {
+  top: 2%;
+  left: 18%;
+  width: 96rem;
+  height: 32rem;
+  opacity: 0.76;
+  filter: blur(18px);
+  animation-duration: 27s;
+  animation-direction: alternate-reverse;
+}
+
+.storm-rain {
+  position: absolute;
+  inset: -28%;
+  display: block;
+  background-image:
+    repeating-linear-gradient(
+      105deg,
+      transparent 0 20px,
+      rgba(125, 211, 252, 0.18) 21px 22px,
+      transparent 23px 56px
+    ),
+    repeating-linear-gradient(
+      105deg,
+      transparent 0 42px,
+      rgba(219, 234, 254, 0.1) 43px 44px,
+      transparent 45px 96px
+    );
+  background-size:
+    86px 140px,
+    132px 190px;
+  opacity: 0.52;
+  transform: skewX(-16deg);
+  animation: storm-rain-fall 0.52s linear infinite;
+}
+
+.storm-rain-streak {
+  position: absolute;
+  top: -18vh;
+  left: var(--left);
+  display: block;
+  width: 1px;
+  height: var(--height);
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(224, 242, 254, 0.24) 20%,
+    rgba(186, 230, 253, 0.74)
+  );
+  box-shadow: 0 0 10px rgba(125, 211, 252, 0.22);
+  opacity: var(--opacity);
+  transform: translate3d(0, -24vh, 0) rotate(15deg);
+  animation: storm-rain-streak-fall var(--duration) linear var(--delay) infinite;
+}
+
+.storm-splashes {
+  position: absolute;
+  right: -8%;
+  bottom: -5%;
+  left: -8%;
+  display: block;
+  height: 24%;
+  background-image:
+    radial-gradient(
+      ellipse,
+      rgba(186, 230, 253, 0.24) 0 1px,
+      transparent 3px
+    ),
+    radial-gradient(
+      ellipse,
+      rgba(255, 255, 255, 0.14) 0 1px,
+      transparent 2px
+    );
+  background-position:
+    0 0,
+    23px 12px;
+  background-size:
+    44px 18px,
+    68px 24px;
+  filter: blur(0.2px);
+  opacity: 0.42;
+  animation: storm-splash-flicker 0.32s steps(2, end) infinite;
+}
+
+.storm-flash {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background:
+    radial-gradient(
+      ellipse at 56% 16%,
+      rgba(254, 240, 138, 0.88),
+      rgba(147, 197, 253, 0.28) 26%,
+      transparent 56%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(239, 246, 255, 0.62),
+      rgba(191, 219, 254, 0.24) 32%,
+      transparent 74%
+    );
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: storm-flash 7.4s steps(1, end) infinite;
+}
+
+.lightning-bolt {
+  position: absolute;
+  top: var(--top);
+  left: var(--left);
+  display: block;
+  width: 4.4rem;
+  height: 46vh;
+  background: linear-gradient(180deg, #ffffff 0%, #fef08a 38%, #fde047 100%);
+  clip-path: polygon(45% 0, 63% 0, 54% 24%, 76% 24%, 55% 51%, 85% 51%, 31% 100%, 44% 61%, 19% 61%, 39% 34%, 20% 34%);
+  filter:
+    drop-shadow(0 0 6px rgba(255, 255, 255, 0.96))
+    drop-shadow(0 0 18px rgba(250, 204, 21, 0.86))
+    drop-shadow(0 0 42px rgba(96, 165, 250, 0.72));
+  opacity: 0;
+  transform: scale(var(--scale), 1.14) rotate(4deg);
+  transform-origin: 50% 0;
+  animation: lightning-strike var(--duration) steps(1, end) var(--delay) infinite;
+}
+
+@keyframes storm-cloud-drift {
+  0% {
+    transform: translate3d(-4%, -1%, 0) scale(1);
+  }
+
+  100% {
+    transform: translate3d(4%, 2%, 0) scale(1.05);
+  }
+}
+
+@keyframes storm-rain-fall {
+  to {
+    background-position:
+      -86px 140px,
+      -132px 190px;
+  }
+}
+
+@keyframes storm-rain-streak-fall {
+  0% {
+    transform: translate3d(8vw, -24vh, 0) rotate(15deg);
+  }
+
+  100% {
+    transform: translate3d(-22vw, 126vh, 0) rotate(15deg);
+  }
+}
+
+@keyframes storm-splash-flicker {
+  50% {
+    opacity: 0.22;
+    transform: translate3d(0.8%, 0, 0);
+  }
+}
+
+@keyframes storm-flash {
+  0%,
+  14%,
+  17%,
+  58%,
+  62%,
+  100% {
+    opacity: 0;
+  }
+
+  14.6%,
+  15.4% {
+    opacity: 0.62;
+  }
+
+  16% {
+    opacity: 0.2;
+  }
+
+  59% {
+    opacity: 0.44;
+  }
+
+  60% {
+    opacity: 0.08;
+  }
+}
+
+@keyframes lightning-strike {
+  0%,
+  13%,
+  18%,
+  57%,
+  63%,
+  100% {
+    opacity: 0;
+  }
+
+  14%,
+  15% {
+    opacity: 1;
+  }
+
+  15.6% {
+    opacity: 0.28;
+  }
+
+  16.4% {
+    opacity: 0.96;
+  }
+
+  58.5% {
+    opacity: 0.74;
+  }
+
+  60% {
+    opacity: 0.18;
+  }
 }
