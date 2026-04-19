@@ -27,13 +27,137 @@ body {
 }
 
 .weather-theme-clear {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background:
     radial-gradient(
-      circle at top left,
-      rgba(255, 255, 255, 0.22),
+      circle at 18% 16%,
+      rgba(255, 255, 255, 0.28),
       transparent 35%
     ),
-    linear-gradient(135deg, #2563eb 0%, #38bdf8 45%, #facc15 100%);
+    radial-gradient(
+      circle at 76% 22%,
+      rgba(254, 240, 138, 0.46),
+      transparent 22%
+    ),
+    linear-gradient(135deg, #1d4ed8 0%, #38bdf8 48%, #fbbf24 100%);
+  background-size: 180% 180%, 140% 140%, 220% 220%;
+  animation: clear-sky-breathe 5s ease-in-out infinite alternate;
+}
+
+.weather-theme-clear::before,
+.weather-theme-clear::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.weather-theme-clear::before {
+  background:
+    radial-gradient(
+      circle at 74% 20%,
+      rgba(255, 249, 196, 0.95) 0 4%,
+      rgba(250, 204, 21, 0.38) 10%,
+      rgba(255, 255, 255, 0.08) 18%,
+      transparent 28%
+    ),
+    conic-gradient(
+      from 8deg at 74% 20%,
+      transparent 0deg,
+      rgba(255, 255, 255, 0.18) 18deg,
+      transparent 36deg,
+      transparent 68deg,
+      rgba(255, 255, 255, 0.12) 84deg,
+      transparent 108deg,
+      transparent 360deg
+    );
+  filter: blur(0.75px);
+  opacity: 0.82;
+  transform-origin: 74% 20%;
+  animation: clear-sun-shimmer 4.5s ease-in-out infinite alternate;
+}
+
+.weather-theme-clear::after {
+  background:
+    radial-gradient(
+      ellipse at 12% 34%,
+      rgba(255, 255, 255, 0.28) 0 7%,
+      transparent 24%
+    ),
+    radial-gradient(
+      ellipse at 36% 66%,
+      rgba(255, 255, 255, 0.2) 0 6%,
+      transparent 21%
+    ),
+    radial-gradient(
+      ellipse at 88% 42%,
+      rgba(255, 255, 255, 0.18) 0 5%,
+      transparent 19%
+    ),
+    linear-gradient(
+      115deg,
+      transparent 0 24%,
+      rgba(255, 255, 255, 0.09) 32%,
+      transparent 42% 100%
+    );
+  background-size: 150% 150%, 135% 135%, 120% 120%, 220% 220%;
+  animation: clear-cloud-parallax 9s ease-in-out infinite alternate;
+}
+
+.weather-theme-clear > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes clear-sky-breathe {
+  0% {
+    background-position: 0% 42%, 100% 12%, 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 58%, 70% 28%, 100% 50%;
+  }
+}
+
+@keyframes clear-sun-shimmer {
+  0% {
+    transform: translate3d(-1%, -0.5%, 0) scale(1);
+    opacity: 0.74;
+  }
+
+  100% {
+    transform: translate3d(1.5%, 1%, 0) scale(1.08);
+    opacity: 0.92;
+  }
+}
+
+@keyframes clear-cloud-parallax {
+  0% {
+    background-position: 0% 30%, 48% 72%, 96% 40%, 0% 50%;
+    transform: translate3d(-7%, -1%, 0) scale(1);
+    opacity: 0.62;
+  }
+
+  45% {
+    opacity: 0.82;
+  }
+
+  100% {
+    background-position: 18% 32%, 62% 66%, 78% 45%, 100% 50%;
+    transform: translate3d(7%, 2%, 0) scale(1.03);
+    opacity: 0.9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .weather-theme-clear,
+  .weather-theme-clear::before,
+  .weather-theme-clear::after {
+    animation: none;
+  }
 }
 
 .weather-theme-clouds {
